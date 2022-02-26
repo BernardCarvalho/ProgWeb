@@ -2,24 +2,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Paginas;
+package Helper;
 
 import Model.Usuario;
+import jakarta.servlet.ServletOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.io.PrintWriter;
 
 /**
  *
  * @author HoxPJ
  */
-@WebServlet(name = "Logout", urlPatterns = {"/Logout"})
-public class Logout extends HttpServlet {
+@WebServlet(name = "Css", urlPatterns = {"/Css"})
+public class Css extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,43 +35,24 @@ public class Logout extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            
-            
-  
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"estilo.css\">");
-            out.println("<meta http-equiv=\"refresh\" content=\"8; URL='Home'\"/>");
-            out.println("<title>Servlet Logout</title>");           
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Logout at " + request.getContextPath() + "</h1>");
-            
-            HttpSession sessao=request.getSession(false);
-            if(sessao!=null)
-            {
-                out.println("<p id='head1' class='header'>"+((Usuario)sessao.getAttribute("usuario")).getNome()+" saiu da sessao</p>");
-                out.println("<p id='head2' class='header'>Redirecionando para a homepage, por favor, aguarde</p>");
-                sessao.invalidate();                
-            }else{
-                out.println("<p id='head1' class='header'>Redirecionando para a homepage, por favor, aguarde</p>");
-            }
-            out.println("<div class='light x1'></div>");
-            out.println("<div class='light x2'></div>");
-            out.println("<div class='light x3'></div>");
-            out.println("<div class='light x4'></div>");
-            out.println("<div class='light x5'></div>");
-            out.println("<div class='light x6'></div>");
-            out.println("<div class='light x7'></div>");
-            out.println("<div class='light x8'></div>");
-            out.println("<div class='light x9'></div>");
-            
-            out.println("</body>");
-            out.println("</html>");
+        
+        response.setContentType("text/css");
+        
+        HttpSession sessao=request.getSession(false);
+        if(sessao==null)
+        {
+            return;
+        }
+        
+        try (ServletOutputStream out = response.getOutputStream()) {
+            String nomeArquivo = request.getParameter("arquivo");
+            String caminho=getServletContext().getRealPath("/WEB-INF/"+nomeArquivo);
+            //caminho=getServletContext().getRealPath("/WEB-INF/imagens/estudante.jpg");
+            File f=new File(caminho);
+            FileInputStream stream=new FileInputStream(f);
+            byte dados[]=new byte[(int)f.length()];
+            stream.read(dados);
+            out.write(dados);
         }
     }
 

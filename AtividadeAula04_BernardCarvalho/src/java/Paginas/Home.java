@@ -37,31 +37,50 @@ public class Home extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Home</title>");            
+            out.println("<title>Servlet Home</title>");
+            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"estilo.css\">");            
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet Home at " + request.getContextPath() + "</h1>");
             if(request.getSession(false)==null){
-                out.println("<p>Você precisa se logar </p>");
-                out.println("<form action='Login'>");
-                out.println("<input type='text' name='nome' placeholder='usuario'/>");
-                out.println("<input type='password' name='senha' placeholder='senha'/>");
-                out.println("<input type='submit' value='Logar'>");
+                
+                
+                out.println("<form class=\"floatright\" action='Login'>");
+                out.println("<input style=\"top: 0vh;text-align:center;\" type='text' name='nome' placeholder='usuario'/>");         
+                out.println("<input style=\"top: 15vh;text-align:center;\" type='password' name='senha' placeholder='senha'/>");
+                out.println("<input style=\"top: 30vh;text-align:center;\" type='submit' value='Logar'>");
                 out.println("</form>");
-                out.println("Usuarios:senhas pré-cadastrados:");
-                out.println("<ul>");
-                out.println("<li>estudante:123</li>");
-                out.println("<li>professor:456</li>");
-                out.println("<li>coordenador:789</li>");
-                out.println("</ul>");
+                
+                out.println("<p id='head1' class='header'>Você precisa se logar</p>");
+                out.println("<p id='head2' class='header'>Usuarios:senhas pré-cadastrados:</p>");
+                out.println("<p id='head3' class='header'>estudante:123</p>");
+                out.println("<p id='head4' class='header'>professor:456</p>");
+                out.println("<p id='head5' class='header'>coordenador:789</p>");
+                
+                
             }else{
                 Usuario usuarioLogado = (Usuario)request.getSession(false).getAttribute("usuario");
-                out.println("Seja bem vindo '"+usuarioLogado.getNome()+"'");
-                out.println("<img src='Jpg' width='50px' height='50px'><br>");
-                out.println("<a href='Logout'>LOGOUT</a>");
+                //out.println("<p id='head1' class='header'>"+"Seja bem vindo '"+usuarioLogado.getNome()+"'"+"</p>");
+                //out.println("Seja bem vindo '"+usuarioLogado.getNome()+"'");
+                out.println("<img style=\"top: 30vh;display:block;margin-left:auto;margin-right:auto;width:10%;\" src='Jpg'><br>");
+                out.println("<p class='header' style=\"top: 40vh;display:block;margin-left:auto;margin-right:auto;\">"+usuarioLogado.getNome()+"</p><br>");
+                out.println("<form class=\"floatright\" action='Logout'>");
+                out.println("<input style=\"top: 60vh;text-align:center;\" type='submit' value='Logout'>");
+                out.println("</form>");
             };
+            out.println("<div class='light x1'></div>");
+            out.println("<div class='light x2'></div>");
+            out.println("<div class='light x3'></div>");
+            out.println("<div class='light x4'></div>");
+            out.println("<div class='light x5'></div>");
+            out.println("<div class='light x6'></div>");
+            out.println("<div class='light x7'></div>");
+            out.println("<div class='light x8'></div>");
+            out.println("<div class='light x9'></div>");
             out.println("</body>");
             out.println("</html>");
+            
+            
         }
     }
 

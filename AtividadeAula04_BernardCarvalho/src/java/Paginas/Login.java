@@ -66,23 +66,35 @@ public class Login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
+            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"estilo.css\">");
             out.println("<title>Servlet Login</title>");
-            out.println("<meta http-equiv=\"refresh\" content=\"3; URL='Home'\"/>");
+            out.println("<meta http-equiv=\"refresh\" content=\"8; URL='Home'\"/>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
-            
+            out.println("<div class='light x1'></div>");
+            out.println("<div class='light x2'></div>");
+            out.println("<div class='light x3'></div>");
+            out.println("<div class='light x4'></div>");
+            out.println("<div class='light x5'></div>");
+            out.println("<div class='light x6'></div>");
+            out.println("<div class='light x7'></div>");
+            out.println("<div class='light x8'></div>");
+            out.println("<div class='light x9'></div>");            
             if(login)
             {
                 HttpSession sessao=request.getSession();
                 sessao.setAttribute("usuario", usuarioLogado);
-                sessao.setMaxInactiveInterval(30);
-                out.println("<br>USUARIO '"+usuarioLogado.getNome()+"' LOGADO COM SUCESSO</br>");
-                out.println("<p>Redirecionando para a homepage, por favor, aguarde</p>");
+                sessao.setMaxInactiveInterval(300);
+                               
+                out.println("<p id='head1' class='header'>USUARIO '"+usuarioLogado.getNome()+"' LOGADO COM SUCESSO</p>");
+                out.println("<p id='head2' class='header'>Redirecionando para a homepage, por favor, aguarde</p>");
+                
             }else
             {
-                out.println("<br>USUARIO NÃO ENCONTRADO NO SISTEMA</br>");
-                out.println("<p>Redirecionando para a homepage, por favor, aguarde</p>");
+                out.println("<p id='head1' class='header'>USUARIO 'USUARIO NÃO ENCONTRADO NO SISTEMA' LOGADO COM SUCESSO</p>");
+                out.println("<p id='head2' class='header'>Redirecionando para a homepage, por favor, aguarde</p>");
+                
             }
             
             
